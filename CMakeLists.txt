@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(webrtc_datachannel)
+project(webrtc_datachannel2)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -11,16 +11,16 @@ find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
-add_executable(webrtc_datachannel
+add_executable(webrtc_datachannel2
   src/datachannel.cpp
   )
 
-ament_target_dependencies(webrtc_datachannel
+ament_target_dependencies(webrtc_datachannel2
     rclcpp
     std_msgs
     geometry_msgs)
 
-  install(TARGETS webrtc_datachannel DESTINATION lib/${PROJECT_NAME})
+  install(TARGETS webrtc_datachannel2 DESTINATION lib/${PROJECT_NAME})
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights

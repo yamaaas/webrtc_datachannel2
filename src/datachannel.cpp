@@ -223,7 +223,7 @@ void DataChannel::pubMsg(const char* msg_buf) {
 
     // sscanf でパース (既存のコード)
     // 注意: msg_buf がJSON形式でない場合、sscanf は失敗する可能性がある
-    int ret = std::sscanf(msg_buf, "{\"x\":%lf,\"z\":%lf}", &x, &z); // 既存のパース処理に近くする
+    int ret = std::sscanf(nmsg.data(), "{\"x\":%lf,\"z\":%lf}", &x, &z); // 既存のパース処理に近くする
     
    if(ret < 0){
       fprintf(stderr, "%s:%s:%d: sscanf error\n", __FILE__, __func__, __LINE__);
