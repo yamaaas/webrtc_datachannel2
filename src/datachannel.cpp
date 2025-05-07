@@ -159,17 +159,17 @@ bool DataChannel::loop() {
 void DataChannel::pubMsg(const char* msg_buf) {
     // *** 追加: まず power_on コマンドかチェック ***
     // strstr は C の関数で、文字列内に部分文字列が含まれるか検索する
-    if (strstr(msg_buf, "power_on:") != NULL) {
+    if (strstr(msg_buf, "p") != NULL) {
         RCLCPP_INFO(this->get_logger(), "Found 'power_on:' in buffer.");
         auto power_msg = std_msgs::msg::Bool();
         bool command_recognized = false;
         // "true" または "false" を探す (引用符込み)
-        if (strstr(msg_buf, "\"true\"") != NULL) {
+        if (strstr(msg_buf, "1") != NULL) {
           RCLCPP_INFO(this->get_logger(), "Found '\"true\"' in buffer.");
             power_msg.data = true;
             command_recognized = true;
             RCLCPP_INFO(this->get_logger(), "Received Power ON command via serial.");
-        } else if (strstr(msg_buf, "\"false\"") != NULL) {
+        } else if (strstr(msg_buf, "0") != NULL) {
           RCLCPP_INFO(this->get_logger(), "Found '\"false\"' in buffer.");
             power_msg.data = false;
             command_recognized = true;
@@ -185,16 +185,16 @@ void DataChannel::pubMsg(const char* msg_buf) {
         }
         return; // 動力コマンドを処理したのでここで終了
     }
-    else if(strstr(msg_buf, "lidar_on:")!= NULL){
+    else if(strstr(msg_buf, "l")!= NULL){
         RCLCPP_INFO(this -> get_logger(), "Found 'lidar_on:' in buffer.");
         auto lidar_msg = std_msgs::msg::Bool();
         bool command_recognized = false;   
-        if (strstr(msg_buf, "\"true\"") != NULL) {
+        if (strstr(msg_buf, "1") != NULL) {
           RCLCPP_INFO(this->get_logger(), "Found '\"true\"' in buffer.");
             lidar_msg.data = true;
             command_recognized = true;
             RCLCPP_INFO(this->get_logger(), "Received Power ON command via serial.");
-        } else if (strstr(msg_buf, "\"false\"") != NULL) {
+        } else if (strstr(msg_buf, "0") != NULL) {
           RCLCPP_INFO(this->get_logger(), "Found '\"false\"' in buffer.");
             lidar_msg.data = false;
             command_recognized = true;
