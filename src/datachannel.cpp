@@ -218,12 +218,12 @@ void DataChannel::pubMsg(const char* msg_buf) {
     // loop 内で受信バッファをそのまま渡す形になったため、
     // ここでの除去は不要かもしれない (Momoからのデータ形式による)
     // 必要であれば、ここで除去処理を追加する。
-    std::string nmsg = std::regex_replace(msg_buf, std::regex("[\n\r]"), "");
+    std::string nmsg = std::regex_replace(msg_buf, std::regex("\n"), "");
     printf("%s\n", nmsg.data()); // 既存のデバッグ出力
 
     // sscanf でパース (既存のコード)
     // 注意: msg_buf がJSON形式でない場合、sscanf は失敗する可能性がある
-    int ret = std::sscanf(msg_buf, "%*[^{]{\"x\":%lf,\"z\":%lf}", &x, &z); // 既存のパース処理に近くする
+    int ret = std::sscanf(msg_buf, "{\"x\":%lf,\"z\":%lf}", &x, &z); // 既存のパース処理に近くする
     
    if(ret < 0){
       fprintf(stderr, "%s:%s:%d: sscanf error\n", __FILE__, __func__, __LINE__);
